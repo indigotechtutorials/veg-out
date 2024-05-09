@@ -1,0 +1,14 @@
+<div class="w-full flex flex-col items-center bg-green-700 min-h-screen pt-32">
+  <h1 class="font-bold text-5xl text-green-500 text-center">Veg Out</h1>
+  <p class="text-center text-green-300 px-8">Hangout with other vegans, and plan community meetups</p>
+  <div class="flex mt-8">
+    <%= image_tag "cute-zucch.png", class: "w-16" %>
+  </div>
+  <div class="flex items-center gap-4 mt-8"> 
+    <%= link_to "Sign in", new_user_session_path, class: "bg-green-600 p-2 rounded-lg text-green-100" %>
+    <%= link_to "Create account", new_user_registration_path, class: "bg-green-600 p-2 rounded-lg text-green-100" %>
+  </div>
+  <div class="px-4 md:px-0 mb-8 w-full">
+    <%= image_tag "happy-lunch.jpg", class: "w-full h-[500px] object-cover mt-8" %>
+  </div>
+</div>
