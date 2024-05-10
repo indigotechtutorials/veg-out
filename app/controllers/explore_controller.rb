@@ -1,11 +1,16 @@
 class ExploreController < ApplicationController
   def index
-    @explore_users = current_user.nearbys(30)
+    current_user.update(last_active: Time.zone.now)
+    @explore_users = current_user.nearbys(30).order(last_active: :desc)
   end
 
   def set_location
     current_user.update(location_params)
     head :ok
+  end
+
+  def change_distance
+
   end
 
   private

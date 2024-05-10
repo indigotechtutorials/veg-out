@@ -7,4 +7,13 @@ export default class extends Controller {
     e.preventDefault()
     this.menuTarget.classList.toggle("hidden")
   }
+
+  closeIfOutside(e) {
+    if (this.menuTarget.classList.contains("hidden")) {
+      return
+    }
+    if (!this.element.contains(e.target)) {
+      this.menuTarget.classList.toggle("hidden")
+    }
+  }
 }

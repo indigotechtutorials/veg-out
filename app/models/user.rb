@@ -4,6 +4,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_rich_text :about_me
+  has_many_attached :images
+  has_many :sent_chat_requests, class_name: "ChatRequest", foreign_key: "user_id"
+  has_many :recieved_chat_requests, class_name: "ChatRequest", foreign_key: "to_user_id"
+
   after_validation :reverse_geocode, if: -> { longitude.present? && latitude.present? }
 
   def full_name

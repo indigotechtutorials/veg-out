@@ -9,18 +9,39 @@
   
   <% if @explore_users %>
     <h2 class="text-lg text-center"> There is <%= @explore_users.size %> people nearby </p>
-
-    <div class="grid md:grid-cols-4 gap-4 max-w-7xl w-full mx-auto">
+    <div class="max-w-md w-full mx-auto" data-controller="range" 
+        data-range-max-value="unlimited" data-range-url-value="<%= explore_change_distance_path%>">
+      <%= range_field_tag :distance, 0, class: "w-full", step: 1, data: { action: "range#updatePreview" } %>
+      <div class="flex justify-between">
+        <span> <span data-range-target="preview"> 0 </span> miles </span>
+        <span> No limit </span>
+      </div>
+    </div>
+    <div class="grid md:grid-cols-4 gap-8 max-w-7xl w-full mx-auto">
       <% @explore_users.each do |user| %>
-        <div class="bg-gray-100 rounded-lg shadow-lg h-64 w-full px-2 pb-2 pt-6 flex flex-col justify-between">
-          <div>
-            <p class="text-center"> <%= user.full_name %> </p>
-            <hr/>
-            <span class="text-indigo-500"> About me </span>
-            <%= user.about_me %>
+        <%= link_to profile_path(user) do %>
+          <div class="bg-gray-100 hover:bg-gray-200 rounded-lg shadow-lg w-full px-2 pb-2 pt-6 flex flex-col justify-between group">
+            <div>
+              <p class="text-center h-8 truncate"> <%= user.full_name %> </p>
+              <hr/>
+              <div class="h-8 truncate">
+                <% if user.about_me&.body&.to_plain_text&.present? %>
+                  <%= user.about_me.body.to_plain_text.first(40) %>
+                <% end %>
+              </div>
+              <div class="h-40 w-full">
+                <% if user.images.any? %>
+                  <%= image_tag user.images.first, class: "h-full w-full object-cover rounded-lg overflow-hidden group-hover:animate-ping" %>
+                <% end %>
+              </div>
+              <p class="h-8 text-sm"> 
+                <% if user.last_active %>
+                  Last active <%= time_ago_in_words(user.last_active) %> ago
+                <% end %>
+               </p>
+            </div>
           </div>
-          <%= link_to "Hit em up", profile_path(user), class: "bg-gradient-to-r from-indigo-500 to-purple-500 text-indigo-100 shadow-lg rounded-lg p-1 ml-auto" %>
-        </div>
+        <% end %>
       <% end %>
     </div>
   <% end %>

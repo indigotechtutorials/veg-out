@@ -1,0 +1,7 @@
+<div class="w-full flex flex-col pt-8">
+  <div class="max-w-2xl w-full mx-auto flex justify-center">
+    <%= link_to "#" do %>
+      <span class="bg-green-500 rounded-lg border-2 border-green-200 text-green-100 p-2"> Manage <%= current_user.recieved_chat_requests.count %> chat requests </span> 
+    <% end %>
+  </div>
+</div>

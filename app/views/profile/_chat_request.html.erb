@@ -1,0 +1,11 @@
+<div id="chat-request" class="flex w-full">
+  <% if !chat_request.persisted? %>
+    <%= link_to "Hit em up", chats_path(to_user_id: chat_request.user.id), class: "bg-gradient-to-r from-indigo-500 to-purple-500 text-indigo-100 shadow-lg rounded-lg p-1 ml-auto", data: { turbo_method: :post } %>
+  <% else %>
+    <% if chat_request.accepted %>
+      <span class="text-sm bg-gradient-to-r from-purple-500 to-pink-500 text-pink-100 p-2 rounded-lg shadow-lg rounded-lg p-1 ml-auto"> Chat Accepted</span>
+    <% else %>
+      <span class="text-sm bg-green-500 text-green-100 p-2 rounded-lg shadow-lg rounded-lg p-1 ml-auto"> Pending response </span>
+    <% end %>
+  <% end %>
+</div>

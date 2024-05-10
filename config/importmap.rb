@@ -8,3 +8,4 @@ pin_all_from "app/javascript/controllers", under: "controllers"
 pin "trix"
 pin "@rails/actiontext", to: "actiontext.esm.js"
 pin "@rails/request.js", to: "@rails--request.js.js" # @0.0.9
+pin "lodash/debounce", to: "lodash--debounce.js" # @4.17.21
