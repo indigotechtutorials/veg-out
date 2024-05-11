@@ -1,0 +1,16 @@
+<div class="w-full flex flex-col pt-8">
+  <div class="max-w-2xl w-full mx-auto flex flex-col px-8">
+    <%= link_to "Back to chats", chats_path, class: "text-lg" %>
+    <br/>
+    <% current_user.new_chat_requests.each do |chat_request| %>
+      <div class="w-full p-2 bg-gray-100 rounded-lg rounded-lg flex flex-col">
+        <span> <%= link_to chat_request.user.full_name, profile_path(chat_request.user), class: "hover:underline" %> would like to talk to you </span>
+        <div class="flex gap-4">
+          <%= link_to "Accept Chat", answer_chats_chat_request_path(chat_request, accepted: true), 
+              class: "bg-green-500 text-green-100 text-sm p-1 rounded-lg", data: { turbo_method: :post } %>
+          <%= link_to "Decline Chat", answer_chats_chat_request_path(chat_request, accepted: false), class: "bg-red-500 text-red-100 text-sm p-1 rounded-lg" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -19,7 +19,9 @@
   <br/>
   <%= @user.about_me %>
   <br/>
-  <div class="flex max-w-xl w-full mx-auto px-8 md:px-0">
-    <%= render "chat_request", chat_request: ChatRequest.find_or_initialize_by(user: current_user, to_user: @user) %>
-  </div>
+  <% if @user != current_user %>
+    <div class="flex max-w-xl w-full mx-auto px-8 md:px-0">
+      <%= render "chat_request", chat_request: ChatRequest.find_or_initialize_by(user: current_user, to_user: @user) %>
+    </div>
+  <% end %>
 </div>

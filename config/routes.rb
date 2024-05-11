@@ -1,3 +1,9 @@
+class ChatConstraints
+  def self.matches?(request)
+    !request.params["id"].in? ["chat_requests"]
+  end
+end
+
 Rails.application.routes.draw do
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -8,7 +14,16 @@ Rails.application.routes.draw do
   post "explore_change_distance", to: "explore#change_distance"
   resources :profile, only: [:show], param: :user_id
   resource :settings, only: [:show, :create]
-  resources :chats, only: [:create, :index]
+  resources :chats, only: [:create, :index, :show], constraints: ChatConstraints do
+    scope module: :chats do
+      resources :chat_messages, only: [:create]
+    end
+  end
+  namespace :chats do
+    resources :chat_requests, only: [:index] do
+      post "answer", to: "chat_requests#answer", on: :member
+    end
+  end
   authenticated :user do
     root to: "explore#index", as: :authenticated_user_root
   end

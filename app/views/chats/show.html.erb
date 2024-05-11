@@ -1,0 +1,16 @@
+<%= turbo_stream_from @chat %>
+<div class="w-full flex flex-col pt-8">
+  <div class="max-w-2xl w-full mx-auto flex flex-col px-8">
+    <%= link_to "Back to chats", chats_path, class: "text-lg" %>
+    <br/>
+    <h1 class="text-xl text-center"> Chat with <%= @chat.chat_users.where.not(user: current_user).first.user.full_name %> </h1>
+    <div class="h-[60vh] w-full flex flex-col gap-4 overflow-y-auto" id="chat-messages" data-controller="chat-messages">
+      <% @chat.chat_messages.each do |chat_message| %>
+        <%= render "chat_message", chat_message: chat_message %>
+      <% end %>
+    </div>
+    <div id="chat-form">
+      <%= render "form", chat: @chat %>
+    </div>
+  </div>
+</div>
