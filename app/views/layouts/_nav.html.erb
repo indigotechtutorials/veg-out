@@ -25,9 +25,13 @@
       <% end %>
     </div>    
     <div data-controller="dropdown" class="relative" data-action="click@window->dropdown#closeIfOutside">
-      <div class="rounded-full w-12 h-12 flex items-center justify-center bg-green-500 cursor-pointer border-2 border-green-600 hover:border-green-400"
+      <div class="rounded-full w-12 h-12 flex items-center justify-center bg-green-500 cursor-pointer border-2 border-green-600 hover:border-green-400 overflow-hidden"
         data-action="click->dropdown#toggle">
-        <%= current_user.initials %>
+        <% if current_user.images.any? %>
+          <%= image_tag current_user.images.first, class: "w-full h-full object-cover" %>
+        <% else %>
+          <%= current_user.initials %>
+        <% end %>
       </div>
 
       <div class="hidden w-40 bg-green-500 absolute top-16 -left-32 z-[999]" data-dropdown-target="menu">

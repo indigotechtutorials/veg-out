@@ -1,4 +1,5 @@
-<div class="p-2 rounded-lg bg-gray-100 flex flex-col" data-chat-messages-target="message">
+<div class="p-2 rounded-lg flex flex-col" 
+    data-chat-messages-target="message" data-user-id="<%= chat_message.user_id %>">
   <div> <%= chat_message.message %> </div>
   <div class="text-sm"> 
     <%= chat_message.user.full_name %> said <%= time_ago_in_words(chat_message.created_at) %> ago 
