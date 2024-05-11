@@ -79,6 +79,6 @@ test:
 #
 production:
   <<: *default
-  database: veg_out_production
-  username: veg_out
-  password: <%= ENV["VEG_OUT_DATABASE_PASSWORD"] %>
+  database: vegout
+  username: vegout
+  password: <%= ENV["VEGOUT_DATABASE_PASSWORD"] %>
